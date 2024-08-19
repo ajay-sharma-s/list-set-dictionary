@@ -1,0 +1,15 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+df=pd.read_csv(r"C:\\Users\\USER\\Documents\\main flow\\01.Data Cleaning and Preprocessing.csv")
+print(df.columns)
+print("line chart")
+plt.plot(df['T-upperExt-2 '],df['T-lowerExt-2  '])
+plt.title("line chart")
+plt.xlabel("T-upperExt-2 ")
+plt.ylabel("T-lowerExt-2 ")
+plt.show()
+plt.bar(['Y-Kappa', 'ChipRate', 'BF-CMratio'],[df['Y-Kappa'].sum(),df['ChipRate'].sum(),df['BF-CMratio'].sum()])
+plt.xlabel("columns")
+plt.ylabel("sum of the column")
+plt.title("Bar chart")
+plt.show()
