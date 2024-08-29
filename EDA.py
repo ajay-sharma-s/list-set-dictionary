@@ -1,0 +1,36 @@
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+data=sns.load_dataset('iris')
+print("first 5 data points : \n",data.head(5))
+print("discriptive statistics : \n ",data.describe())
+print("check missing values of the datasets : \n",data.isnull().sum())
+print("information of the dataset")
+print(data.info())
+print("\t\t--------------- univariate analysis ---------------------\t\t")
+for column in data.columns[:-1]:
+    sns.displot(data[column], kde=True)
+    plt.title(f'Distribution of {column}')
+    plt.show()
+print("\t\t--------------- Bivariate analysis ----------------------\t\t")
+plt.figure(figsize=(8,5))
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=data)
+plt.title('Sepal Length vs. Sepal Width')
+plt.show()
+sns.pairplot(data, hue='species')
+plt.show()
+print("\t\t--------------- Correlation analysis ----------------------\t\t")
+plt.figure(figsize=(8,5))
+correlation = data.corr()
+sns.heatmap(correlation, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Correlation Matrix')
+plt.show()
+print("\t\t--------------- Identify Outliers ----------------------\t\t")
+plt.figure(figsize=(8,5))
+for i, column in enumerate(data.columns[:-1], 1):
+    plt.subplot(2, 2, i)
+    sns.boxplot(x='species', y=column, data=data)
+    plt.title(f'Boxplot of {column} by Species')
+    plt.tight_layout()
+plt.show()
